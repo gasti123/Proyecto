@@ -201,8 +201,13 @@ public class VentanaTablaCompu extends JFrame {
 				String ID = textID.getText();
 				int CantHorasPrestamos = (int) SpinnerCantHoras.getValue();
 				String Grupo = textGrupo.getText();
-				gestor.registrarPrestamoComputadora(ci, Nombre, Apellido, ID, CantHorasPrestamos, Grupo);
-				gestor.listarCompuPrestamo(modelo);
+				
+				if (gestor.checkCompus(ID)) {
+					gestor.registrarPrestamoComputadora(ci, Nombre, Apellido, ID, CantHorasPrestamos,Grupo);
+					gestor.listarCompuPrestamo(modelo);
+				}else {
+					JOptionPane.showMessageDialog(null,"No existe un libro con esa ISBN");
+				}
 			}
 		});
 
