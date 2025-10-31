@@ -199,8 +199,13 @@ public class VentanaTablaLibro extends JFrame {
 				String ISBN = textISBN.getText();
 				int CantDias = (int) cantDias.getValue();
 
-				gestor.registrarPrestamoLibro(Ci, Nombre, Apellido, ISBN, CantDias);
-				gestor.listarLibroPrestamo(modelo);
+				if (gestor.checkLibro(ISBN)) {
+					gestor.registrarPrestamoLibro(Ci, Nombre, Apellido, ISBN, CantDias);
+					gestor.listarLibroPrestamo(modelo);
+				}else {
+					JOptionPane.showMessageDialog(null,"No existe un libro con esa ISBN");
+				}
+
 			}
 		});
 		actualizar.addActionListener(new ActionListener() {
