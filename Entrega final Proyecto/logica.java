@@ -65,8 +65,7 @@ public class logica {
 
 	// Compus----------------------------------------------------------------------------------------------------------------------------
 	// parametros
-	public void registrarPrestamoComputadora(String ci, String Nombre, String Apellido, String ID, int CantHorasPrestamos,
-			String Grupo) {
+	public void registrarPrestamoComputadora(String ci, String Nombre, String Apellido, String ID, int CantHorasPrestamos,String Grupo) {
 		if (ci.length() < 8 || Nombre.length() < 1 || Apellido.length() < 1 || ID.length() < 4 || CantHorasPrestamos < 1) {
 			JOptionPane.showMessageDialog(null, "No fue posible guardar la informacion correctamente");
 		} else {
@@ -126,6 +125,29 @@ public class logica {
 	public void BajaCompuInv(String dato) {
 		mysql.BorrarInvCompu(dato);
 
+	}
+
+	public boolean checkLibro(String iSBN) {
+
+		boolean resultado = false;
+		
+		if(mysql.chequearExisteLibro(iSBN)) {
+			resultado = true;
+		}
+		
+		return resultado;
+		
+	}
+	public boolean checkCompus(String ID) {
+
+		boolean resultado = false;
+		
+		if(mysql.chequearExisteCompus(ID)) {
+			resultado = true;
+		}
+		
+		return resultado;
+		
 	}
 
 }
