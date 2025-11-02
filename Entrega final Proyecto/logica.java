@@ -46,13 +46,13 @@ public class logica {
 	// ---------------------------FUNCIONES-----------------------------------------------
 
 //LIBRO------------------------------------------------------------------------------------------------------------------------------
-	public void registrarPrestamoLibro(String ci, String Nombre, String Apellido, String ISBN, int CantDias) {
-		if (ci.length() < 8 || Nombre.length() < 1 || Apellido.length() < 1 || ISBN.length() < 17 || CantDias < 1) {
+	public void registrarPrestamoLibro(String ISBN,String ci, String Nombre, String Apellido, int CantDias) {
+		if (ISBN.length() < 17 ||  ci.length() < 8 ||Nombre.length() < 1 || Apellido.length() < 1 ) {
 			JOptionPane.showMessageDialog(null, "No fue posible guardar la informacion correctamente");
 		} else {
-			mysql.registrarPrestamoLibros(ci, Nombre, Apellido, ISBN, CantDias);
+			mysql.registrarPrestamoLibros(ISBN, ci, Nombre, Apellido, CantDias);
 
-		}
+		}//ci.length() < 8
 	}
 
 	public void GuardarLibroInv(String ISBN, String Titulo, String Autor, String PaisOrigen) {
