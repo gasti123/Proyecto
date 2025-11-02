@@ -46,6 +46,16 @@ public class VentanaTablaLibro extends JFrame {
 		PanelInterior.add(ingresar);
 		PanelInterior.add(Box.createVerticalStrut(20));
 
+		JLabel LabelISBN = new JLabel("ISBN");
+		LabelISBN.setForeground(blanco);
+		JTextField textISBN = new JTextField();
+		textISBN.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+		textISBN.setPreferredSize(new Dimension(30, 30));
+		textISBN.setBackground(blanco);
+		textISBN.setForeground(negro);
+		
+		
+		
 		JLabel LabelCi = new JLabel("CI");
 		LabelCi.setForeground(blanco);
 		JTextField textCi = new JTextField();
@@ -67,13 +77,6 @@ public class VentanaTablaLibro extends JFrame {
 		textApellido.setBackground(blanco);
 		textApellido.setForeground(negro);
 
-		JLabel LabelISBN = new JLabel("ISBN");
-		LabelISBN.setForeground(blanco);
-		JTextField textISBN = new JTextField();
-		textISBN.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
-		textISBN.setPreferredSize(new Dimension(30, 30));
-		textISBN.setBackground(blanco);
-		textISBN.setForeground(negro);
 
 		JLabel dias = new JLabel("Cantidad de dias a prestar");
 		dias.setForeground(blanco);
@@ -85,6 +88,11 @@ public class VentanaTablaLibro extends JFrame {
 		cantDias.setBackground(blanco);
 		cantDias.setForeground(negro);
 
+		
+		
+		PanelInterior.add(LabelISBN);
+		PanelInterior.add(textISBN);
+		PanelInterior.add(Box.createVerticalStrut(10));
 		PanelInterior.add(LabelCi);
 		PanelInterior.add(textCi);
 		PanelInterior.add(Box.createVerticalStrut(10));
@@ -93,9 +101,6 @@ public class VentanaTablaLibro extends JFrame {
 		PanelInterior.add(Box.createVerticalStrut(10));
 		PanelInterior.add(LabelApellido);
 		PanelInterior.add(textApellido);
-		PanelInterior.add(Box.createVerticalStrut(10));
-		PanelInterior.add(LabelISBN);
-		PanelInterior.add(textISBN);
 		PanelInterior.add(Box.createVerticalStrut(10));
 		PanelInterior.add(dias);
 		PanelInterior.add(cantDias);
@@ -168,10 +173,10 @@ public class VentanaTablaLibro extends JFrame {
 		panelTabla.add(panelBotonesArriba, BorderLayout.NORTH);
 
 		DefaultTableModel modelo = new DefaultTableModel();
+		modelo.addColumn("ISBN");
 		modelo.addColumn("CI");
 		modelo.addColumn("Nombre");
 		modelo.addColumn("Apellido");
-		modelo.addColumn("ISBN");
 		modelo.addColumn("Cant Dias Prestados");
 
 		JTable tabla = new JTable(modelo);
@@ -193,14 +198,14 @@ public class VentanaTablaLibro extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+				String ISBN = textISBN.getText();
 				String Ci = textCi.getText();
 				String Nombre = textNombre.getText();
-				String Apellido = textApellido.getText();
-				String ISBN = textISBN.getText();
+				String Apellido = textApellido.getText();			
 				int CantDias = (int) cantDias.getValue();
 
 				if (gestor.checkLibro(ISBN)) {
-					gestor.registrarPrestamoLibro(Ci, Nombre, Apellido, ISBN, CantDias);
+					gestor.registrarPrestamoLibro(ISBN,Ci, Nombre, Apellido, CantDias);
 					gestor.listarLibroPrestamo(modelo);
 				}else {
 					JOptionPane.showMessageDialog(null,"No existe un libro con esa ISBN");
